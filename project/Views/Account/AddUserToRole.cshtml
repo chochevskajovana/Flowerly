@@ -1,0 +1,24 @@
+﻿@model project.Models.AddToRoleModel
+@{
+    ViewBag.Title = "AddUserToRole";
+}
+
+<div class="card m-auto p-4 w-25 mulberry-color">
+    <h3 class="text-center">Add user with this email to a role:</h3>
+
+    @using (Html.BeginForm("AddUserToRole", "Account"))
+    {
+        <div class="form-group m-1">
+            @Html.LabelFor(z => z.Email)
+            @Html.TextBoxFor(z => z.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group m-1">
+            @Html.DropDownListFor(z => z.SelectedRole, new SelectList(Model.Roles), new { @class = "form-control" })
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-outline-danger ">Save</button>
+        </div>
+
+    }
+</div>
+<br />

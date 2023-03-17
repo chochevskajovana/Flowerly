@@ -1,0 +1,170 @@
+﻿@model IEnumerable<project.Models.Cart>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+<head>
+    <style>
+        .bootbox-close-button {
+            display: none !important;
+        }
+
+        .modal-footer button:last-of-type {
+            background-color: rgb(91, 50, 86);
+            color: white;
+            border: none;
+        }
+
+        .empty {
+            color: rgb(91, 50, 86);
+        }
+
+        /* data tables */
+        #table-data_paginate {
+            font-size: small;
+        }
+
+        #table-data_info {
+            font-size: x-small;
+        }
+
+        #last-row{
+            border-bottom: transparent;
+        }
+        /* data tables */
+    </style>
+</head>
+<body>
+    @if (Model.Count() == 0)
+    {
+        <div>
+            <h3 class="m-auto d-flex justify-content-center empty mb-2">Your cart is empty!</h3>
+        </div>
+        <div>
+            <i class="fa-solid fa-cart-plus m-auto d-flex justify-content-center empty mb-2" style="font-size:7em; "></i>
+        </div>
+        <div class="m-auto d-flex justify-content-center empty mb-2">
+            @Html.ActionLink("Add a flower of your choice", "Index",new { Controller = "Plants"}, new { @class = "btn btn-outline-danger " })
+        </div>
+    }
+    else
+    {
+        <br />
+        <div>
+            <h2 class="m-auto d-flex justify-content-center">My Cart</h2>
+        </div>
+
+        <div>
+            <br />
+            <table class="table" id="table-data">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th class="w-25 text-center">
+                            @Html.DisplayNameFor(model => model.PictureURL)
+                        </th>
+                        <th class="d-none d-lg-table-cell">
+                            @Html.DisplayNameFor(model => model.LongDescription)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Available)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Price)
+                        </th>
+                        <th style="width:10%;"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td class="w-25 text-center">
+                                <img class="w-75" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="@Html.DisplayFor(modelItem => item.Name)">
+                            </td>
+                            <td class="d-none d-lg-table-cell">
+                                @Html.DisplayFor(modelItem => item.LongDescription)
+                            </td>
+                            <td class="text-center">
+                                @if (item.Available)
+                                {
+                                    <p class="badge alert-success me-2 pb-2 pt-2">Yes</p>
+                                }
+                                else
+                                {
+                                    <p class="badge alert-danger me-2 pb-2 pt-2">No</p>
+                                }
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Price) $
+                            </td>
+                            <td class="text-center">
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-danger p-0 px-2 my-2" })
+                                @Html.ActionLink("Remove", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-secondary p-0 px-2" })
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+
+                <tfoot>
+                    <tr id="last-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="mx-2 pt-2 text-center">
+                            @{ double sum = 0;}
+                            @foreach (var item in Model)
+                            {
+                                sum += item.Price;
+                            }
+                            Total: @sum $
+                        </td>
+                        <td class="mx-2">
+                            <button class="js-checkout btn btn-outline-danger">Buy all <i class="fa-solid fa-clipboard-check"></i></button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            
+        </div>
+        <br />
+    }
+
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+
+                $("#table-data").DataTable();
+
+                $(".js-checkout").on("click", function () {
+                    bootbox.confirm("Are you sure you want to continue with the purchase?", function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/Carts/EmptyCart",
+                                method: "GET",
+                                success: function () {
+
+                                }
+                            });
+                            $(document).ajaxStop(function () {
+                                window.location.reload();
+                            });
+                        }
+                    });
+                })
+            })
+        </script>
+    }
+
+</body>
+</html>

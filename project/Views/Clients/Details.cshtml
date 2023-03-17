@@ -1,0 +1,58 @@
+﻿@model project.Models.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<br />
+<div class="card m-auto p-4 w-25">
+    <h3 class="text-center mulberry-color">Detils of the client @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</h3>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <!-- <h4>Client</h4> -->
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Name):
+                @Html.DisplayFor(model => model.Name)
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Surname):
+                @Html.DisplayFor(model => model.Surname)
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Email):
+                @Html.DisplayFor(model => model.Email)
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Age):
+                @Html.DisplayFor(model => model.Age)
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.CardNumber):
+                @Html.DisplayFor(model => model.CardNumber)
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col text-center">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-outline-danger" }) 
+                    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+                </div>
+            </div>
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

@@ -1,0 +1,56 @@
+﻿@model project.Models.Plant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container m-auto  w-75 p-1">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <h3 class="text-center mulberry-color">Details for @Html.DisplayFor(model => model.Name)</h3>
+
+        <div class="card mb-3">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img class="card-img-top" src="@Html.DisplayFor(model => model.PictureURL)" alt="@Html.DisplayFor(model => model.Name)">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(model => model.Name)</h5>
+                        <p class="card-text">@Html.DisplayFor(model => model.LongDescription)</p>
+
+
+                        <div class="row mt-3">
+                            <div class="col me-2 d-flex justify-content-start">
+                                @if (Model.Available)
+                                {
+                                    <p class="badge alert-success me-2 pb-2 pt-2">Available</p>
+                                }
+                                else
+                                {
+                                    <p class="badge alert-danger me-2 pb-2 pt-2">Not Available</p>
+                                }
+                                <p class="fw-bolder me-2">$ @Html.DisplayFor(model => model.Price)</p>
+                                <p>In stock: @Html.DisplayFor(model => model.NumInStock)</p>
+                            </div>
+                            <div class="col text-end">
+                                @if (User.IsInRole("Administrator") || User.IsInRole("Warehouseman") || User.IsInRole("Salesman"))
+                                {
+                                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-outline-secondary" })
+                                }
+
+                                @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+                            </div>
+                        </div> 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<br />

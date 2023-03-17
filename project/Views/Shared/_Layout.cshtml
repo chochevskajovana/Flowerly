@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="shortcut icon" href="https://img.icons8.com/dusk/72/spa-flower.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+
+
+    <style>
+        body {
+            font-family: 'Libre Baskerville', serif;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+        }
+
+        h5, h3 {
+            font-weight: bold;
+        }
+
+        .fill-in {
+            font-size: small;
+        }
+
+        .btn-outline-danger {
+            color: rgb(91, 50, 86);
+            border-color: rgb(91, 50, 86);
+        }
+
+            .btn-outline-danger:hover {
+                background-color: rgb(91, 50, 86);
+                border-color: rgb(91, 50, 86);
+            }
+
+        .btn-outline-danger-full {
+            background-color: rgb(216,191,216);
+            border-color: rgb(91, 50, 86);
+            color: rgb(91, 50, 86);
+        }
+
+            .btn-outline-danger-full:hover {
+                background-color: rgb(91, 50, 86);
+                border-color: rgb(91, 50, 86);
+                color: white;
+            }
+
+        .mulberry-color {
+            color: rgb(91, 50, 86);
+        }
+
+        .light-pink-border {
+            border-color: rgb(216,191,216);
+            /* box-shadow: 8px 8px 3px rgb(241,206,212); */
+        }
+
+            .light-pink-border:hover {
+                border-color: rgb(91, 50, 86);
+                box-shadow: 15px 15px 5px rgb(216,191,216);
+            }
+
+        .pink-efect {
+            box-shadow: 5px 5px 40px 5px rgb(216,191,216) inset;
+        }
+
+        .log {
+            color: rgb(91, 50, 86);
+            text-decoration: none;
+        }
+
+        .log-hello:hover {
+            color: rgb(91, 50, 86);
+            opacity: 0.6;
+        }
+
+        .log-off:hover {
+            color: rgb(91, 50, 86);
+            opacity: 0.6;
+        }
+
+        .log-register:hover {
+            color: rgb(91, 50, 86);
+            opacity: 0.6;
+        }
+
+        .log-in:hover {
+            color: rgb(91, 50, 86);
+            opacity: 0.6;
+        }
+
+        .btn-outline-success {
+            color: rgb(115, 134, 120);
+            border-color: rgb(115, 134, 120);
+        }
+
+            .btn-outline-success:hover {
+                background-color: rgb(115, 134, 120);
+                border-color: rgb(115, 134, 120);
+            }
+
+        ::-webkit-scrollbar {
+            width: .60rem;
+            background-color: white;
+            border-radius: .5rem;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(216,191,216);
+            border-radius: .5rem;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: rgb(91, 50, 86);
+            }
+
+        .logo {
+            font-family: 'Allura', cursive;
+            font-weight: bold;
+            font-size: 90%;
+            color: rgb(91, 50, 86) !important;
+        }
+
+            .logo:hover {
+                color: rgb(91, 50, 86);
+                opacity: 0.7;
+            }
+
+        .nav-i {
+            color: rgb(91, 50, 86) !important;
+            text-decoration: none;
+        }
+
+        .nav_naslov {
+            font-family: 'Libre Baskerville', serif;
+            color: rgb(91, 50, 86) !important;
+            text-decoration: none;
+        }
+
+        .nav_plant:hover {
+            color: rgb(91, 50, 86);
+            opacity: 0.6;
+        }
+
+        .nav_client:hover {
+            color: rgb(91, 50, 86);
+            opacity: 0.6;
+        }
+
+        .nav_add-user:hover {
+            color: rgb(91, 50, 86);
+            opacity: 0.6;
+        }
+
+        .nav_add-cart:hover {
+            color: rgb(91, 50, 86);
+            opacity: 0.6;
+        }
+
+        /* footer */
+        footer {
+            padding-top: 5vh;
+            padding-bottom: 2vh;
+        }
+
+        .text-black {
+            color: rgb(91, 50, 86) !important;
+        }
+        /* footer */
+
+        /* data tables */
+        .page-item.active .page-link {
+            z-index: 3;
+            color: rgb(91, 50, 86);
+            background-color: rgba(216,191,216);
+            border-color: #dee2e6;
+        }
+        .page-link {
+            color: rgb(91, 50, 86);
+        }
+            .page-link:hover {
+                color: rgb(91, 50, 86);
+            }
+        /* data tables */
+        
+    </style>
+
+
+    <!--password (na site users): 123$As -->
+
+</head>
+<body>
+    <header class="header" style="background-color: rgb(216,191,216)">
+        <nav class="navbar navbar-expand-lg bg-transparent navbar-light py-3 py-lg-0 px-lg-5">
+            <div class="container-fluid p-1 py-2 pt-0 align-items-md-end">
+                <div class="d-flex justify-content-start align-items-md-end">
+                    <img src="https://img.icons8.com/dusk/72/spa-flower.png" class="me-1 p-0 w-25 h-25" />
+                    <h1 class="p-0 m-0">@Html.ActionLink("Flowerly", "Index", "Home", new { area = "" }, new { @class = "navbar-brand logo" })</h1>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav_naslov">
+                        <li class="nav-link nav_plant">@Html.ActionLink("Plants", "Index", "Plants", new { }, new { @class = "nav-i me-1" })<i class="fa-brands fa-pagelines" style="color: rgb(91, 50, 86)"></i></li>
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Customer"))
+                        {
+                            <li class="nav-link nav_plant">@Html.ActionLink("My cart", "Index", "Carts", new { }, new { @class = "nav-i" }) <i class="fa-solid fa-cart-shopping" style="color: rgb(91, 50, 86)"></i></li>
+                        }
+
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Salesman"))
+                        {
+                            <li class="nav-link nav_client">@Html.ActionLink("Customers", "Index", "Clients", new { }, new { @class = "nav-i me-1" }) <i class="fa-solid fa-users" style="color: rgb(91, 50, 86)"></i></li>
+                        }
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-link nav_add-user">@Html.ActionLink("Add user to role", "AddUserToRole", "Account", new { }, new { @class = "nav-i me-1" })<i class="fa-solid fa-person-circle-question" style="color: rgb(91, 50, 86)"></i></li>
+                        }
+                    </ul>
+                    <div class="d-flex nav_naslov">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container h-100">
+        <div class="row align-items-center h-100">
+            <div class="col">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid fluid_footer" style="background-color: rgb(216,191,216)">
+        <footer class="row py-2 m-0 pt-2">
+            <div class=" col-md-4 text-center pt-md-0 pt-2 d-block" style="padding: 0.5rem 1rem;">
+                <p class="p-0 m-0 pt-2" style="color: rgb(91, 50, 86)"> &copy; Jovana Chochevska, 2022 </p>
+            </div><!-- Copyright -->
+
+            <div class="col-md-4 text-center pt-md-0 pt-4 mt-1">
+                <p class="p-0 m-0" style="font-family: 'Allura', cursive; font-size: x-large; color: rgb(91, 50, 86);">
+                    <span class="logo">Flowerly</span> - The best flowers online.
+                </p>
+            </div><!-- Impressum -->
+
+            <div class="col-md-4 text-center pt-md-0 pt-2">
+                <div class="d-inline-flex align-items-center pt-2">
+                    <a class="text-black px-2" href="#" target="_blank">
+                        <i class="fa-brands fa-facebook fa-xl"></i>
+                    </a>
+                    <a class="text-black px-2" href="#" target="_blank">
+                        <i class="fa-brands fa-instagram fa-xl"></i>
+                    </a>
+                    <a class="text-black px-2" href="#" target="_blank">
+                        <i class="fa-brands fa-pinterest fa-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
+</body>
+    </html>

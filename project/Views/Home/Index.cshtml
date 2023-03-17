@@ -1,0 +1,379 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+
+<html>
+<head>
+    <!-- for Galery -->
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" /> -->
+    <!-- for Galery -->
+
+    <style>
+        body {
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        .jumbotron {
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background: linear-gradient(rgba(91, 50, 86, 0.5),rgba(91, 50, 86, 0.5)), url( @Url.Content("~/Content/Images/tulips-cover-page.jpg") );
+            
+        }
+
+        .jumbotron-fluid {
+            padding-right: 0;
+            padding-left: 0;
+        }
+        .back_fluid{
+            color: black;
+        }
+
+        /* for Galery */
+        section {
+            padding: 50px 0;
+        }
+
+        .gallery-title {
+            font-size: 30px;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 70px;
+            color: rgb(91, 50, 86);
+        }
+        .arangements-title {
+            font-size: 30px;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: rgb(91, 50, 86);
+        }
+
+        .filter-button {
+            font-size: 18px;
+            border: 2px solid #3F6184;
+            padding: 5px 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            background: transparent;
+        }
+            .filter-button.active {
+                background-color: rgb(216,191,216);
+                border-color: rgb(216,191,216);
+                color: rgb(91, 50, 86);
+                outline: none;
+            }
+
+        .gallery_product {
+            margin: 0px;
+            padding: 0px;
+            position: relative;
+        }
+
+            .gallery_product .img-info {
+                position: absolute;
+                background: rgba(0,0,0,0.5);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 20px;
+                overflow: hidden;
+                color: #fff;
+                top: 0;
+                display: none;
+                -webkit-transition: 2s;
+                transition: 2s;
+                
+            }
+
+            .gallery_product:hover .img-info {
+                display: block;
+                border-radius: 1.5%;
+                -webkit-transition: 2s;
+                transition: 2s;
+            }
+
+            .gallery_product:hover{
+                padding:0;
+                margin: 0;
+            }
+
+            .f-round {
+                color: rgb(91, 50, 86);
+                border-color: rgb(91, 50, 86);
+                border-radius: 15%;
+            }
+
+            .f-round:hover {
+                background-color: rgb(91, 50, 86);
+                border-color: rgb(91, 50, 86);
+                border-radius: 50%;
+                color: white;
+            }
+
+            .img-info{
+                
+            }
+        /*	for Galery */
+    </style>
+    <script>
+    
+        /*	gallery */
+        $(document).ready(function () {
+
+            $(".filter-button").click(function () {
+                var value = $(this).attr('data-filter');
+
+                if (value == "all") {
+                    $('.filter').show('1000');
+                }
+                else {
+                    $(".filter").not('.' + value).hide('3000');
+                    $('.filter').filter('.' + value).show('3000');
+
+                }
+
+                if ($(".filter-button").removeClass("active")) {
+                    $(this).removeClass("active");
+                }
+                $(this).addClass("active");
+            });
+        });
+
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            });
+        });
+        /* gallery */
+        $('.carousel').carousel({
+            interval: 2000
+        })
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand navbar-light bg-transparent mb-0">
+                <div class="m-auto p-0">
+                    <div id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" href="#gallery">Gallery</a>
+                            <a class="nav-link" href="#arangements">Arangements</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <div class="jumbotron jumbotron-fluid mb-5 h-auto">
+                    <div class="text-center py-5 ">
+                        <h1 class="text-white display-3 ">Flowers for your loved ones</h1>
+                        <div class="d-inline-flex align-items-center text-white">
+                            <p class="m-0">
+                                <a class="text-white" href="" style="text-decoration: none;">
+                                    Flower arangements - perfect gift to surprise your family and friends.
+
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Navbar -->
+        </header>
+    </div>
+
+    <!-- Gallery -->
+    <div class="container" id="gallery">
+        <section class="portfolio pt-0" id="portfolio">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h3 class="gallery-title mb-3">Gallery</h3>
+                    </div>
+
+                    <div align="center">
+                        <button class="filter-button f-round" data-filter="all">All</button>
+                        <button class="filter-button f-round" data-filter="category1">Spring</button>
+                        <button class="filter-button f-round" data-filter="category2">Summer</button>
+                        <button class="filter-button f-round" data-filter="category3">Fall</button>
+                        <button class="filter-button f-round" data-filter="category4">Winter</button>
+                    </div>
+
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category1">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/beautiful-bright-colorful-multicolored-yellow-white-red-purple-pink-picture-id1187363996?k=20&m=1187363996&s=612x612&w=0&h=fL6EYy3BXpQKA7hhjN4oZu-hz9BO6tlbSZwY2PoVjvA=">
+                            <img class="img-fluid w-100 " alt="" src="https://media.istockphoto.com/photos/beautiful-bright-colorful-multicolored-yellow-white-red-purple-pink-picture-id1187363996?k=20&m=1187363996&s=612x612&w=0&h=fL6EYy3BXpQKA7hhjN4oZu-hz9BO6tlbSZwY2PoVjvA=" />
+                            <div class='img-info'>
+                                <h3>Tulip</h3>
+                                <p>Tulips are a genus of spring-blooming perennial herbaceous bulbiferous geophytes.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category2">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/sunflowers-field-landscape-picture-id505393057?k=20&m=505393057&s=612x612&w=0&h=MhUZ_4al-qR6rGGJRay9JO53nH0HypXc8xNEL2ZqfHg=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/sunflowers-field-landscape-picture-id505393057?k=20&m=505393057&s=612x612&w=0&h=MhUZ_4al-qR6rGGJRay9JO53nH0HypXc8xNEL2ZqfHg=" />
+                            <div class='img-info'>
+                                <h3>Sunflower</h3>
+                                <p>The sunflower (Helianthus annuus) is an annual plant with a large daisy-like flower face.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category4">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/snowdrop-flowers-blooming-in-winter-picture-id510479542?k=20&m=510479542&s=612x612&w=0&h=G_zmBM4-GpyKWpm3Gy0teFifZi9Yxpden6-nD036QnE=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/snowdrop-flowers-blooming-in-winter-picture-id510479542?k=20&m=510479542&s=612x612&w=0&h=G_zmBM4-GpyKWpm3Gy0teFifZi9Yxpden6-nD036QnE=" />
+                            <div class='img-info'>
+                                <h3>Snowdrop</h3>
+                                <p>Galanthus, or snowdrop, is a small genus of approximately 20 species of bulbous perennial herbaceous plants in the family Amaryllidaceae.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category1">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/blooming-lavender-flowers-detail-picture-id1205826202?k=20&m=1205826202&s=612x612&w=0&h=DL7ynI0jSyB0KwwJbifOCq2kFf_NVJOpEBi-5FRobBs=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/blooming-lavender-flowers-detail-picture-id1205826202?k=20&m=1205826202&s=612x612&w=0&h=DL7ynI0jSyB0KwwJbifOCq2kFf_NVJOpEBi-5FRobBs=" />
+                            <div class='img-info'>
+                                <h3>Lavander</h3>
+                                <p>Lavander or Lavandula is a genus of 47 known species of flowering plants in the mint family</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category2">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/beautiful-begonia-flowers-in-the-garden-picture-id591822358?k=20&m=591822358&s=612x612&w=0&h=F3TZhStRF1QUJYWYG5ewcX7HB65XcfuMMl9RFuQvxYU=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/beautiful-begonia-flowers-in-the-garden-picture-id591822358?k=20&m=591822358&s=612x612&w=0&h=F3TZhStRF1QUJYWYG5ewcX7HB65XcfuMMl9RFuQvxYU=" />
+                            <div class='img-info'>
+                                <h3>Begonia</h3>
+                                <p>Begonia is a genus of perennial flowering plants in the family Begoniaceae. The genus contains more than 2,000 different plant species.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category3">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/small-purple-asters-wildflowers-background-picture-id495663508?k=20&m=495663508&s=612x612&w=0&h=XMHb-ONotM4Zc-puFsRFu_GGmV2MSkltoYuBxsWfhPI=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/small-purple-asters-wildflowers-background-picture-id495663508?k=20&m=495663508&s=612x612&w=0&h=XMHb-ONotM4Zc-puFsRFu_GGmV2MSkltoYuBxsWfhPI=" />
+                            <div class='img-info'>
+                                <h3>Aster</h3>
+                                <p>Aster is a genus of perennial flowering plants in the family Asteraceae.</p>
+                            </div>
+                        </a>
+                    </div>
+
+
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category1">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/assortment-of-pinkshaded-zinnias-in-a-flower-patch-picture-id155285202?k=20&m=155285202&s=612x612&w=0&h=y4cOH9rl2HDOE6dqzrqkgAbvrYl0klQP6UkzA4zLtKo=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/assortment-of-pinkshaded-zinnias-in-a-flower-patch-picture-id155285202?k=20&m=155285202&s=612x612&w=0&h=y4cOH9rl2HDOE6dqzrqkgAbvrYl0klQP6UkzA4zLtKo=" />
+                            <div class='img-info'>
+                                <h3>Zinnia</h3>
+                                <p>Zinnia is a genus of plants of the tribe Heliantheae within the family Asteraceae. They are native to scrub and dry grassland</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category1">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/bunch-of-yellow-daffodils-picture-id472990572?k=20&m=472990572&s=612x612&w=0&h=an3Zw6Yq19RzrZnX3r9bQTjTE6U0dnAvyq_VuFZjyGk=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/bunch-of-yellow-daffodils-picture-id472990572?k=20&m=472990572&s=612x612&w=0&h=an3Zw6Yq19RzrZnX3r9bQTjTE6U0dnAvyq_VuFZjyGk=" />
+                            <div class='img-info'>
+                                <h3>Daffodil</h3>
+                                <p>Daffodil other known as Narcissus is a genus of predominantly spring flowering perennial plants of the amaryllis family, Amaryllidaceae.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category3">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/carnation-pink-kisses-picture-id1243009286?k=20&m=1243009286&s=612x612&w=0&h=JiwFKhIGiq3dbky9FP06PifSNhG8L2Y3KGS4x7sAUrU=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/carnation-pink-kisses-picture-id1243009286?k=20&m=1243009286&s=612x612&w=0&h=JiwFKhIGiq3dbky9FP06PifSNhG8L2Y3KGS4x7sAUrU=" />
+                            <div class='img-info'>
+                                <h3>Dianthus caryophyllus</h3>
+                                <p>Dianthus caryophyllus Pink Kisses may be treated as annuals or short-lived perennials in the garden.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category4">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/christmas-rose-helleborus-niger-dark-red-flower-is-garden-plant-in-picture-id1205289845?k=20&m=1205289845&s=612x612&w=0&h=4iVQwAzhQQPBIowmish2XcOcsM29r5BK8VIM_xpXWWo=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/christmas-rose-helleborus-niger-dark-red-flower-is-garden-plant-in-picture-id1205289845?k=20&m=1205289845&s=612x612&w=0&h=4iVQwAzhQQPBIowmish2XcOcsM29r5BK8VIM_xpXWWo=" />
+                            <div class='img-info'>
+                                <h3>Christmas Rose</h3>
+                                <p>Christmas Rose also known as Helleborus niger is a semi-evergreen perennial species with a flowering height of around 30cm. Foliage is pedately lobed, rigid and coloured dark green.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category2">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/echinacea-purpurea-picture-id674164836?k=20&m=674164836&s=612x612&w=0&h=bzsDSM0vpUTjJEDrklwjOa3c_VI9xepkNoxQqRrnYZk=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/echinacea-purpurea-picture-id674164836?k=20&m=674164836&s=612x612&w=0&h=bzsDSM0vpUTjJEDrklwjOa3c_VI9xepkNoxQqRrnYZk=" />
+                            <div class='img-info'>
+                                <h3>Coneflower</h3>
+                                <p>Coneflower or Echinacea is a genus of herbaceous flowering plants in the daisy family. It has ten species, which are commonly called coneflowers.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-6 filter category2">
+                        <a class="fancybox" rel="ligthbox" href="https://media.istockphoto.com/photos/blooming-hybrid-cultivar-jackmans-clematis-picture-id826716392?k=20&m=826716392&s=612x612&w=0&h=_xEiH3G9Dzap0PBvWqEB_IZD2Y02tT0nGH3G4n5raaU=">
+                            <img class="img-fluid w-100" alt="" src="https://media.istockphoto.com/photos/blooming-hybrid-cultivar-jackmans-clematis-picture-id826716392?k=20&m=826716392&s=612x612&w=0&h=_xEiH3G9Dzap0PBvWqEB_IZD2Y02tT0nGH3G4n5raaU=" />
+                            <div class='img-info'>
+                                <h3>Clematis 'Jackmanii'</h3>
+                                <p>Clematis 'Jackmanii' is a Clematis cultivar which, when it was introduced in 1862, was the first of the modern large-flowered hybrid clematises of gardens.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- End Gallery -->
+    <!-- carousel -->
+
+    <div class="container pb-4 ">
+        <div class="arangements" id="arangements">
+            <h3 class="arangements-title">Arangements</h3>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide mx-auto" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="@Url.Content("~/Content/Images/s1.jpg")" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="@Url.Content("~/Content/Images/s2.jpeg")" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="@Url.Content("~/Content/Images/s3.png")" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- end carousel -->
+
+</body>
+</html>

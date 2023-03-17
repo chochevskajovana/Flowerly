@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right log pe-2" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @{
+                string[] name = User.Identity.GetUserName().Split(separator: '@');
+            }
+            @Html.ActionLink("Hello " + name[0], "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "log log-hello" })
+            <i class="fa-solid fa-circle-user fa-lg pe-2 me-3"></i>
+        </li>
+        <li><a class = "log pe-2 log-off" href="javascript:document.getElementById('logoutForm').submit()">Log off</a><i class="fa-sharp fa-solid fa-right-from-bracket" style="color: rgb(91, 50, 86)"></i></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class=" me-3">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink",  @class = "log pe-2 log-register" })<i class="fa-solid fa-user-plus" style="color: rgb(91, 50, 86)"></i></li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "log pe-2 log-in" })<i class="fa-solid fa-right-to-bracket" style="color: rgb(91, 50, 86)"></i></li>
+    </ul>
+}

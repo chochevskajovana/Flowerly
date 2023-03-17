@@ -1,0 +1,113 @@
+﻿@model PagedList.IPagedList<project.Models.Plant>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<html>
+<head>
+    <style>
+        .active .page-link {
+            background-color: rgba(216,191,216) !important;
+        }
+
+        .page-item .page-link:not(.active .page-link) {
+            color: rgb(91, 50, 86) !important;
+        }
+
+        #pag{
+            font-size: small;
+        }
+    </style>
+</head>
+<body id="body">
+    <div class="mt-2 text-center mulberry-color">
+        <h2>Choose the flowers you like</h2>
+        <h4>and add them to your cart</h4>
+        <p>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Salesman") || User.IsInRole("Warehouseman"))
+            {
+                @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-outline-success p-1" })
+            }
+        </p>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="container d-flex justify-content-center w-50">
+            @Html.TextBox("SearchString", "", new { @class = "form-control", type = "search", placeholder = "Search a flower..." })
+            <input class="btn btn-outline-danger ms-1" type="submit" value="Search" />
+        </div>
+    }
+
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 mb-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card m-2 h-100 light-pink-border pink-efect">
+
+                    <img class="card-img-top pink-efect opacity-3" src="@Url.Content(item.PictureURL)" alt="@Html.DisplayFor(modelItem => item.Name)">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <p class="card-text" style="font-size:small">@Html.DisplayFor(modelItem => item.ShortDescription)</p>
+                        <div class="p-1 row">
+                            <div class="card-text col text-start">
+                                <p class="fw-bolder" style="font-size:large;">$ @Html.DisplayFor(modelItem => item.Price)</p>
+                            </div>
+                            <div class="card-text col text-start">
+                                <p class="pt-2" style="font-size:x-small">Stock: @Html.DisplayFor(modelItem => item.NumInStock)</p>
+                            </div>
+                            <div class="card-text col text-end">
+                                @if (item.Available)
+                                {
+                                    <p class="badge alert-success">Available</p>
+                                }
+                                else
+                                {
+                                    <p class="badge alert-danger">Not Available</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="card-text row align-content-center mb-1">
+                            <div class="col-lg-4 d-flex justify-content-start">
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-danger p-0 px-3 me-1" })
+                            </div>
+                            <div class="col-lg-8 d-flex justify-content-end ">
+                                @Html.ActionLink("Add to cart", "Create", "Carts", new { id = item.Id }, new { @class = "btn btn-outline-danger-full p-0 px-3 me-1" })
+
+                            </div>
+                        </div>
+                        <div class="card-text d-flex justify-content-center">
+                            @if (User.IsInRole("Administrator") || User.IsInRole("Salesman") || User.IsInRole("Warehouseman"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-secondary p-0 px-3 me-1" })
+                            }
+                            @if (User.IsInRole("Administrator") || User.IsInRole("Salesman"))
+                            {
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-secondary p-0 px-3 me-1" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+        <div class="d-flex justify-content-center mt-4 pt-2" id="pag">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+   
+
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $(".pagination li").addClass("page-item");
+                $(".pagination li a").addClass("page-link");
+                $(".pagination li a").addClass("px-4");
+                $(".pagination li a").addClass("py-0");
+            })
+        </script>
+    }
+</body>
+</html>
